@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34316.72
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{F7B1C26F-8E92-46F7-926F-A9D8ED024C97}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{B82BD33A-8E3D-40EE-99F4-6DE341672E94}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{270165C2-87F2-4B9C-A122-4A69C873E3B3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{56057BBF-DB3C-472C-86A9-6B6C652E7117}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tetra.Domain", "Tetra.Domain\Tetra.Domain.csproj", "{3DC0C662-1647-4009-A690-A24BC3DE9762}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tetra.Application", "Tetra.Application\Tetra.Application.csproj", "{75777497-2560-4320-BF41-5D4B90352945}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tetra.Persistence", "Tetra.Persistence\Tetra.Persistence.csproj", "{DFAB3025-E083-46A4-97B2-0BBB40DFEB5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tetra.WebApi", "Tetra.WebApi\Tetra.WebApi.csproj", "{5C912B13-396A-45A5-B407-0291199308A7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3DC0C662-1647-4009-A690-A24BC3DE9762}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DC0C662-1647-4009-A690-A24BC3DE9762}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DC0C662-1647-4009-A690-A24BC3DE9762}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DC0C662-1647-4009-A690-A24BC3DE9762}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75777497-2560-4320-BF41-5D4B90352945}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75777497-2560-4320-BF41-5D4B90352945}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75777497-2560-4320-BF41-5D4B90352945}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75777497-2560-4320-BF41-5D4B90352945}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFAB3025-E083-46A4-97B2-0BBB40DFEB5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFAB3025-E083-46A4-97B2-0BBB40DFEB5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFAB3025-E083-46A4-97B2-0BBB40DFEB5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFAB3025-E083-46A4-97B2-0BBB40DFEB5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C912B13-396A-45A5-B407-0291199308A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C912B13-396A-45A5-B407-0291199308A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C912B13-396A-45A5-B407-0291199308A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C912B13-396A-45A5-B407-0291199308A7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3DC0C662-1647-4009-A690-A24BC3DE9762} = {F7B1C26F-8E92-46F7-926F-A9D8ED024C97}
+		{75777497-2560-4320-BF41-5D4B90352945} = {F7B1C26F-8E92-46F7-926F-A9D8ED024C97}
+		{DFAB3025-E083-46A4-97B2-0BBB40DFEB5C} = {B82BD33A-8E3D-40EE-99F4-6DE341672E94}
+		{5C912B13-396A-45A5-B407-0291199308A7} = {270165C2-87F2-4B9C-A122-4A69C873E3B3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {81D9FCCB-EDCA-4872-A14A-F1C4487ED8FE}
+	EndGlobalSection
+EndGlobal
