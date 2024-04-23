@@ -1,6 +1,13 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Tetra.Application.Requests.Commands.CreateRequest;
+using Tetra.Application.Requests.Commands.DeleteRequest;
+using Tetra.Application.Requests.Commands.UpdateRequest;
+using Tetra.Application.Requests.Queries.GetAllRequests;
+using Tetra.Application.Requests.Queries.GetRequest;
+using Tetra.Application.Requests.Queries.GetRequestsList;
 using Tetra.Domain;
+using Tetra.WebApi.Models;
 
 namespace Tetra.WebApi.Controllers
 {
@@ -9,38 +16,75 @@ namespace Tetra.WebApi.Controllers
     {
         private readonly IMapper _mapper = mapper;
 
-        [HttpGet]
+        [HttpGet("getAllByClientId")]
+        public async Task<ActionResult<IList<Request>>> GetAllByClientId(Guid id)
+        {
+            var query = new GetRequestsByClientIdQuery
+            {
+                ClientId = id,
+            };
+
+            var requests = await Mediator.Send(query);
+
+            return Ok(requests);
+        }
+
+        [HttpGet("getAll")]
         public async Task<ActionResult<IList<Request>>> GetAll()
         {
-            var list = new List<Request>();
+            var query = new GetAllRequestsQuery
+            {
+                UserId = UserId,
+            };
 
-            return Ok(list);
+            var requests = await Mediator.Send(query);
+
+            return Ok(requests);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Request>> Get(Guid id)
         {
-            var request = new Request();
+            var query = new GetRequestQuery
+            {
+                Id = id,
+            };
+
+            var request = await Mediator.Send(query);
 
             return Ok(request);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> Create()
+        public async Task<ActionResult<Guid>> Create([FromBody] CreateRequestDto createRequestDto)
         {
-            return Ok(Guid.Empty);
+            var command = _mapper.Map<CreateRequestCommand>(createRequestDto);
+
+            var reqId = await Mediator.Send(command);
+
+            return Ok(reqId);
         }
 
         [HttpPut]
-        //UpdateRequestDto
-        public async Task<IActionResult> Update([FromBody] Request request)
+        public async Task<IActionResult> Update([FromBody] UpdateRequestDto updateRequestDto)
         {
+            var command = _mapper.Map<UpdateRequestCommand>(updateRequestDto);
+
+            await Mediator.Send(command);
+
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
+            var command = new DeleteRequestCommand
+            {
+                Id = id,
+            };
+
+            await Mediator.Send(command);
+
             return NoContent();
         }
     }

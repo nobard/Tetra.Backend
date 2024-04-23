@@ -7,17 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Middleware\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="MediatR" Version="12.2.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Tetra.Application\Tetra.Application.csproj" />
     <ProjectReference Include="..\Tetra.Domain\Tetra.Domain.csproj" />
+    <ProjectReference Include="..\Tetra.Persistence\Tetra.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
