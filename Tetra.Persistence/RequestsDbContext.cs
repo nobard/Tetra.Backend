@@ -6,10 +6,8 @@ using Tetra.Persistence.EntityTypeConfigurations;
 namespace Tetra.Persistence
 {
     public class RequestsDbContext(DbContextOptions<RequestsDbContext> options)
-        : DbContext(options), IRequestsDbContext
+        : DbContext(options)
     {
-        public DbSet<Request> Requests { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new RequestConfiguration());

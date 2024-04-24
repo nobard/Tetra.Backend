@@ -7,8 +7,8 @@ namespace Tetra.Domain
         public Guid Id { get; set; }
         public int RequestNumber { get; set; }
         public RequestStatus Status { get; set; }
-        public string DepartureCity { get; set; }
-        public string ArrivalCity { get; set; }
+        public string DepartureCity { get; set; } = null!;
+        public string ArrivalCity { get; set; } = null!;
         public int ContainerSize { get; set; }
         public int CargoWeight { get; set; }
         public double Price { get; set; }

@@ -8,6 +8,8 @@ namespace Tetra.Persistence.EntityTypeConfigurations
     {
         public void Configure(EntityTypeBuilder<Request> builder)
         {
+            builder.ToTable("Requests");
+
             builder.HasKey(request => request.Id);
             builder.HasIndex(request => request.Id).IsUnique();
         }

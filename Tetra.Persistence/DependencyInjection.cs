@@ -16,8 +16,8 @@ namespace Tetra.Persistence
                 options.UseSqlite(connectionString);
             });
 
-            services.AddScoped<IRequestsDbContext>(provider
-                => provider.GetService<RequestsDbContext>());
+            services.AddScoped<DbContext>(provider
+               => provider.GetService<RequestsDbContext>());
 
             return services;
         }
