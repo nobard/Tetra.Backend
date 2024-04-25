@@ -10,7 +10,7 @@ using Tetra.Persistence;
 namespace Tetra.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class RequestsDbContextModelSnapshot : ModelSnapshot
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -83,7 +83,7 @@ namespace Tetra.Persistence.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("UserData", (string)null);
+                    b.ToTable("UsersData", (string)null);
                 });
 
             modelBuilder.Entity("Tetra.Domain.UserDomain", b =>

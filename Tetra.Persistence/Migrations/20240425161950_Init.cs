@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Tetra.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class UsersTable : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,7 +30,34 @@ namespace Tetra.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserData",
+                name: "Requests",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Status = table.Column<int>(type: "INTEGER", nullable: false),
+                    DepartureCity = table.Column<string>(type: "TEXT", nullable: false),
+                    ArrivalCity = table.Column<string>(type: "TEXT", nullable: false),
+                    ContainerSize = table.Column<int>(type: "INTEGER", nullable: false),
+                    CargoWeight = table.Column<int>(type: "INTEGER", nullable: false),
+                    Price = table.Column<double>(type: "REAL", nullable: false),
+                    DepartureDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    RequestCreateDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Comment = table.Column<string>(type: "TEXT", nullable: true),
+                    ClientId = table.Column<Guid>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Requests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Requests_Users_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UsersData",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
@@ -39,9 +66,9 @@ namespace Tetra.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserData", x => x.Id);
+                    table.PrimaryKey("PK_UsersData", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserData_Users_UserId",
+                        name: "FK_UsersData_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -54,36 +81,29 @@ namespace Tetra.Persistence.Migrations
                 column: "ClientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserData_UserId",
-                table: "UserData",
-                column: "UserId",
+                name: "IX_Requests_Id",
+                table: "Requests",
+                column: "Id",
                 unique: true);
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Requests_Users_ClientId",
-                table: "Requests",
-                column: "ClientId",
-                principalTable: "Users",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+            migrationBuilder.CreateIndex(
+                name: "IX_UsersData_UserId",
+                table: "UsersData",
+                column: "UserId",
+                unique: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Requests_Users_ClientId",
-                table: "Requests");
+            migrationBuilder.DropTable(
+                name: "Requests");
 
             migrationBuilder.DropTable(
-                name: "UserData");
+                name: "UsersData");
 
             migrationBuilder.DropTable(
                 name: "Users");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Requests_ClientId",
-                table: "Requests");
         }
     }
 }

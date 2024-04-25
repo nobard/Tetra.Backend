@@ -11,8 +11,8 @@ using Tetra.Persistence;
 namespace Tetra.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240425153026_UsersTable")]
-    partial class UsersTable
+    [Migration("20240425161950_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -86,7 +86,7 @@ namespace Tetra.Persistence.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("UserData", (string)null);
+                    b.ToTable("UsersData", (string)null);
                 });
 
             modelBuilder.Entity("Tetra.Domain.UserDomain", b =>

@@ -11,7 +11,8 @@ namespace Tetra.Persistence.EntityTypeConfigurations
             builder.ToTable("Requests")
                 .HasKey(request => request.Id);
 
-            builder.HasIndex(request => request.Id).IsUnique();
+            builder.HasIndex(request => request.Id)
+                .IsUnique();
         }
     }
 }

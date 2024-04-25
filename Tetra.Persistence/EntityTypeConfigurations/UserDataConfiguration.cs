@@ -8,7 +8,7 @@ namespace Tetra.Persistence.EntityTypeConfigurations
     {
         public void Configure(EntityTypeBuilder<UserDataDomain> builder)
         {
-            builder.ToTable("UserData")
+            builder.ToTable("UsersData")
                 .HasKey(ud => ud.Id);
         }
     }
