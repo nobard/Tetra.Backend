@@ -4,13 +4,13 @@ using Tetra.Domain;
 
 namespace Tetra.Persistence.EntityTypeConfigurations
 {
-    public class RequestConfiguration : IEntityTypeConfiguration<Request>
+    public class RequestConfiguration : IEntityTypeConfiguration<RequestDomain>
     {
-        public void Configure(EntityTypeBuilder<Request> builder)
+        public void Configure(EntityTypeBuilder<RequestDomain> builder)
         {
-            builder.ToTable("Requests");
+            builder.ToTable("Requests")
+                .HasKey(request => request.Id);
 
-            builder.HasKey(request => request.Id);
             builder.HasIndex(request => request.Id).IsUnique();
         }
     }

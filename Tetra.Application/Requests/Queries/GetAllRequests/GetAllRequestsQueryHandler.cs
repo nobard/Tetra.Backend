@@ -5,23 +5,16 @@ using Tetra.Domain;
 
 namespace Tetra.Application.Requests.Queries.GetAllRequests
 {
-    public class GetAllRequestsQueryHandler
-        : IRequestHandler<GetAllRequestsQuery, IList<Request>>
+    public class GetAllRequestsQueryHandler(IRequestsDbContext requestsDbContext)
+        : IRequestHandler<GetAllRequestsQuery, IList<RequestDomain>>
     {
-        private readonly DbContext _requests;
-        private readonly DbSet<Request> _requestsSet;
+        private readonly IRequestsDbContext _requestsDbContext = requestsDbContext;
 
-        public GetAllRequestsQueryHandler(DbContext requestsDbContext)
+        public async Task<IList<RequestDomain>> Handle(GetAllRequestsQuery request, CancellationToken cancellationToken)
         {
-            _requests = requestsDbContext;
-            _requestsSet = _requests.Set<Request>();
-        }
+            var a = _requestsDbContext.Requests.ToList();
 
-        public async Task<IList<Request>> Handle(GetAllRequestsQuery request, CancellationToken cancellationToken)
-        {
-            var a = _requestsSet.ToList();
-
-            return await _requestsSet.ToListAsync(cancellationToken);
+            return await _requestsDbContext.Requests.ToListAsync(cancellationToken);
         }
     }
 }

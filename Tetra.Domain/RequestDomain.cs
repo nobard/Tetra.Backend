@@ -2,10 +2,9 @@
 
 namespace Tetra.Domain
 {
-    public class Request
+    public class RequestDomain
     {
         public Guid Id { get; set; }
-        public int RequestNumber { get; set; }
         public RequestStatus Status { get; set; }
         public string DepartureCity { get; set; } = null!;
         public string ArrivalCity { get; set; } = null!;
@@ -16,5 +15,6 @@ namespace Tetra.Domain
         public DateTime RequestCreateDate { get; set; }
         public string? Comment { get; set; }
         public Guid ClientId { get; set; }
+        public UserDomain Client { get; set; }
     }
 }

@@ -11,13 +11,16 @@ namespace Tetra.Persistence
         {
             var connectionString = configuration["DbConnection"];
 
-            services.AddDbContext<RequestsDbContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlite(connectionString);
             });
 
-            services.AddScoped<DbContext>(provider
-               => provider.GetService<RequestsDbContext>());
+            services.AddScoped<IRequestsDbContext>(provider
+               => provider.GetService<ApplicationDbContext>());
+
+            services.AddScoped<IUsersDbContext>(provider
+               => provider.GetService<ApplicationDbContext>());
 
             return services;
         }

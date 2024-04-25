@@ -6,25 +6,18 @@ using Tetra.Domain;
 
 namespace Tetra.Application.Requests.Commands.UpdateRequest
 {
-    public class UpdateRequestCommandHandler
+    public class UpdateRequestCommandHandler(IRequestsDbContext requestsDbContext)
         : IRequestHandler<UpdateRequestCommand>
     {
-        private readonly DbContext _requestsDbContext;
-        private readonly DbSet<Request> _requests;
-
-        public UpdateRequestCommandHandler(DbContext requestsDbContext)
-        {
-            _requestsDbContext = requestsDbContext;
-            _requests = requestsDbContext.Set<Request>();
-        }
+        private readonly IRequestsDbContext _requestsDbContext = requestsDbContext;
 
         public async Task Handle(UpdateRequestCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _requests.FirstOrDefaultAsync(req => req.Id == request.Id, cancellationToken);
+            var entity = await _requestsDbContext.Requests.FirstOrDefaultAsync(req => req.Id == request.Id, cancellationToken);
 
             if (entity is null)
             {
-                throw new NotFoundException(nameof(Request), request.Id);
+                throw new NotFoundException(nameof(RequestDomain), request.Id);
             }
 
             entity.Status = request.Status;

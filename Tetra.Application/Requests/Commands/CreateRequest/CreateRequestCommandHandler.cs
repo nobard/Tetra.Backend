@@ -1,27 +1,19 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Tetra.Application.Interfaces;
 using Tetra.Domain;
 
 namespace Tetra.Application.Requests.Commands.CreateRequest
 {
-    public class CreateRequestCommandHandler : IRequestHandler<CreateRequestCommand, Guid>
+    public class CreateRequestCommandHandler(IRequestsDbContext requestsDbContext)
+        : IRequestHandler<CreateRequestCommand, Guid>
     {
-        private readonly DbSet<Request> _requests;
-        private readonly DbContext _requestsDbContext;
-
-        public CreateRequestCommandHandler(DbContext con)
-        {
-            _requests = con.Set<Request>();
-            _requestsDbContext = con;
-        }
+        private readonly IRequestsDbContext _requestsDbContext = requestsDbContext;
 
         public async Task<Guid> Handle(CreateRequestCommand request, CancellationToken cancellationToken)
         {
-            var newRequest = new Request
+            var newRequest = new RequestDomain
             {
                 Id = Guid.NewGuid(),
-                RequestNumber = _requests.Count() + 1,
                 Status = Domain.Enums.RequestStatus.Created,
                 DepartureCity = request.DepartureCity,
                 ArrivalCity = request.ArrivalCity,
@@ -34,7 +26,7 @@ namespace Tetra.Application.Requests.Commands.CreateRequest
                 ClientId = request.ClientId,
             };
 
-            await _requests.AddAsync(newRequest);
+            await _requestsDbContext.Requests.AddAsync(newRequest);
             await _requestsDbContext.SaveChangesAsync(cancellationToken);
 
             return newRequest.Id;

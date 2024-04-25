@@ -11,8 +11,8 @@ using Tetra.Persistence;
 namespace Tetra.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240423123329_init")]
-    partial class init
+    [Migration("20240425141629_RequestNumberDeleted")]
+    partial class RequestNumberDeleted
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,9 +55,6 @@ namespace Tetra.Persistence.Migrations
                     b.Property<DateTime>("RequestCreateDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("RequestNumber")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("Status")
                         .HasColumnType("INTEGER");
 
@@ -66,7 +63,7 @@ namespace Tetra.Persistence.Migrations
                     b.HasIndex("Id")
                         .IsUnique();
 
-                    b.ToTable("Requests");
+                    b.ToTable("Requests", (string)null);
                 });
 #pragma warning restore 612, 618
         }

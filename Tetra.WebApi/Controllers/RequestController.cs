@@ -18,7 +18,7 @@ namespace Tetra.WebApi.Controllers
         private readonly IMapper _mapper = mapper;
 
         [HttpGet("getAllByClientId")]
-        public async Task<ActionResult<IList<Request>>> GetAllByClientId(Guid id)
+        public async Task<ActionResult<IList<RequestDomain>>> GetAllByClientId(Guid id)
         {
             var query = new GetRequestsByClientIdQuery
             {
@@ -31,7 +31,7 @@ namespace Tetra.WebApi.Controllers
         }
 
         [HttpGet("getAll")]
-        public async Task<ActionResult<IList<Request>>> GetAll()
+        public async Task<ActionResult<IList<RequestDomain>>> GetAll()
         {
             var query = new GetAllRequestsQuery
             {
@@ -44,7 +44,7 @@ namespace Tetra.WebApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Request>> Get(Guid id)
+        public async Task<ActionResult<RequestDomain>> Get(Guid id)
         {
             var query = new GetRequestQuery
             {

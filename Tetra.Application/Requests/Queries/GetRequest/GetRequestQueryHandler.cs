@@ -6,22 +6,18 @@ using Tetra.Domain;
 
 namespace Tetra.Application.Requests.Queries.GetRequest
 {
-    public class GetRequestQueryHandler : IRequestHandler<GetRequestQuery, Request>
+    public class GetRequestQueryHandler(IRequestsDbContext requestsDbContext)
+        : IRequestHandler<GetRequestQuery, RequestDomain>
     {
-        private readonly DbSet<Request> _requests;
+        private readonly IRequestsDbContext _requestsDbContext = requestsDbContext;
 
-        public GetRequestQueryHandler(DbContext requestsDbContext)
+        public async Task<RequestDomain> Handle(GetRequestQuery request, CancellationToken cancellationToken)
         {
-            _requests = requestsDbContext.Set<Request>();
-        }
-
-        public async Task<Request> Handle(GetRequestQuery request, CancellationToken cancellationToken)
-        {
-            var entity = await _requests.FirstOrDefaultAsync(req => req.Id == request.Id, cancellationToken);
+            var entity = await _requestsDbContext.Requests.FirstOrDefaultAsync(req => req.Id == request.Id, cancellationToken);
 
             if (entity is null)
             {
-                throw new NotFoundException(nameof(Request), request.Id);
+                throw new NotFoundException(nameof(RequestDomain), request.Id);
             }
 
             return entity;

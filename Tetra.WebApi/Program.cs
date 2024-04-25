@@ -1,9 +1,9 @@
 using System.Reflection;
 using Tetra.Application.Common.Mappings;
-using Tetra.Application.Interfaces;
 using Tetra.Application;
 using Tetra.Persistence;
 using Tetra.WebApi.Middleware;
+using Tetra.Application.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,7 +54,7 @@ using (var scope = app.Services.CreateScope())
 
     try
     {
-        var context = servicesProvider.GetRequiredService<RequestsDbContext>();
+        var context = servicesProvider.GetRequiredService<ApplicationDbContext>();
 
         DbInitializer.Initialize(context);
     }

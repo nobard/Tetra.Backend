@@ -2,7 +2,7 @@
 {
     public class DbInitializer
     {
-        public static void Initialize(RequestsDbContext context)
+        public static void Initialize(ApplicationDbContext context)
         {
             context.Database.EnsureCreated();
         }
