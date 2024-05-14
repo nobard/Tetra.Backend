@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Tetra.Application.Interfaces;
+using Tetra.Persistence.Security;
 
 namespace Tetra.Persistence
 {
@@ -21,6 +22,11 @@ namespace Tetra.Persistence
 
             services.AddScoped<IUsersDbContext>(provider
                => provider.GetService<ApplicationDbContext>());
+
+            services.AddScoped<IDbContext>(provider
+               => provider.GetService<ApplicationDbContext>());
+
+            services.AddScoped<IPasswordHasher, PasswordHasher>();
 
             return services;
         }

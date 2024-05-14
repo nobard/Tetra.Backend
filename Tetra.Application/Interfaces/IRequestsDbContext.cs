@@ -3,9 +3,8 @@ using Tetra.Domain;
 
 namespace Tetra.Application.Interfaces
 {
-    public interface IRequestsDbContext
+    public interface IRequestsDbContext : IDbContext
     {
         DbSet<RequestDomain> Requests { get; set; }
-        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

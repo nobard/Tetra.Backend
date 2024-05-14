@@ -12,8 +12,6 @@ namespace Tetra.Application.Requests.Queries.GetAllRequests
 
         public async Task<IList<RequestDomain>> Handle(GetAllRequestsQuery request, CancellationToken cancellationToken)
         {
-            var a = _requestsDbContext.Requests.ToList();
-
             return await _requestsDbContext.Requests.ToListAsync(cancellationToken);
         }
     }

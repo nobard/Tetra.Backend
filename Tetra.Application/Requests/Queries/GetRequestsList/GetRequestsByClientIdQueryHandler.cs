@@ -14,7 +14,7 @@ namespace Tetra.Application.Requests.Queries.GetRequestsList
         {
             var requests = await _requestsDbContext.Requests
                 .Where(req => req.ClientId == request.ClientId)
-                .ToListAsync();
+                .ToListAsync(cancellationToken);
 
             return requests;
         }

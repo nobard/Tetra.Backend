@@ -18,4 +18,8 @@
     <ProjectReference Include="..\Tetra.Application\Tetra.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>

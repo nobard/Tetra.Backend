@@ -8,83 +8,76 @@ using Tetra.Application.Requests.Queries.GetAllRequests;
 using Tetra.Application.Requests.Queries.GetRequest;
 using Tetra.Application.Requests.Queries.GetRequestsList;
 using Tetra.Domain;
-using Tetra.WebApi.Models;
 
 namespace Tetra.WebApi.Controllers
 {
     [Route("api/[controller]")]
-    public class RequestController(IMapper mapper) : BaseController
+    public class RequestsController : BaseController
     {
-        private readonly IMapper _mapper = mapper;
-
         [HttpGet("getAllByClientId")]
-        public async Task<ActionResult<IList<RequestDomain>>> GetAllByClientId(Guid id)
+        public async Task<ActionResult<IList<RequestDomain>>> GetAllByClientId(Guid id, CancellationToken cancellationToken)
         {
             var query = new GetRequestsByClientIdQuery
             {
                 ClientId = id,
             };
 
-            var requests = await Mediator.Send(query);
+            var requests = await Mediator.Send(query, cancellationToken);
 
             return Ok(requests);
         }
 
         [HttpGet("getAll")]
-        public async Task<ActionResult<IList<RequestDomain>>> GetAll()
+        public async Task<ActionResult<IList<RequestDomain>>> GetAll(CancellationToken cancellationToken)
         {
             var query = new GetAllRequestsQuery
             {
                 UserId = UserId,
             };
 
-            var requests = await Mediator.Send(query);
+            var requests = await Mediator.Send(query, cancellationToken);
 
             return Ok(requests);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<RequestDomain>> Get(Guid id)
+        public async Task<ActionResult<RequestDomain>> Get(Guid id, CancellationToken cancellationToken)
         {
             var query = new GetRequestQuery
             {
                 Id = id,
             };
 
-            var request = await Mediator.Send(query);
+            var request = await Mediator.Send(query, cancellationToken);
 
             return Ok(request);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> Create([FromBody] CreateRequestDto createRequestDto)
+        public async Task<ActionResult<Guid>> Create([FromBody] CreateRequestCommand command, CancellationToken cancellationToken)
         {
-            var command = _mapper.Map<CreateRequestCommand>(createRequestDto);
-
-            var reqId = await Mediator.Send(command);
+            var reqId = await Mediator.Send(command, cancellationToken);
 
             return Ok(reqId);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] UpdateRequestDto updateRequestDto)
+        public async Task<IActionResult> Update([FromBody] UpdateRequestCommand command, CancellationToken cancellationToken)
         {
-            var command = _mapper.Map<UpdateRequestCommand>(updateRequestDto);
-
-            await Mediator.Send(command);
+            await Mediator.Send(command, cancellationToken);
 
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
         {
             var command = new DeleteRequestCommand
             {
                 Id = id,
             };
 
-            await Mediator.Send(command);
+            await Mediator.Send(command, cancellationToken);
 
             return NoContent();
         }
